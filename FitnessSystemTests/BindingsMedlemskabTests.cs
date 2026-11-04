@@ -89,7 +89,7 @@ namespace FitnessSystemTests
     public class KlippekortMedlemskabTests
     {
         [TestMethod]
-        public void TC8()
+        public void TC7()
         {
             KlippekortMedlemskab sut = new KlippekortMedlemskab(
                 start: new DateTime(2026, 1, 1),
@@ -101,7 +101,7 @@ namespace FitnessSystemTests
         }
 
         [TestMethod]
-        public void TC9()
+        public void TC8()
         {
             KlippekortMedlemskab sut = new KlippekortMedlemskab(
                 start: new DateTime(2026, 1, 1),
@@ -114,7 +114,7 @@ namespace FitnessSystemTests
         }
 
         [TestMethod]
-        public void TC10()
+        public void TC9()
         {
             KlippekortMedlemskab sut = new KlippekortMedlemskab(
                 start: new DateTime(2026, 1, 1),
@@ -123,12 +123,12 @@ namespace FitnessSystemTests
 
             double result = sut.BeregnSamletPris();
 
-            // Fejler: ugyldige klip skal ignoreres, men koden trækker 50 kr. fra.
+            // Før rettelsen trak koden 50 kr. fra for et ugyldigt klip.
             Assert.AreEqual(200.0, result);
         }
 
         [TestMethod]
-        public void TC11()
+        public void TC10()
         {
             KlippekortMedlemskab sut = new KlippekortMedlemskab(
                 start: new DateTime(2026, 1, 1),
@@ -137,7 +137,7 @@ namespace FitnessSystemTests
 
             double result = sut.BeregnSamletPris();
 
-            // Fejler: klokkeslættet skal ignoreres, men koden sammenligner hele datoen.
+            // Før rettelsen blev klokkeslættet sammenlignet.
             Assert.AreEqual(500.0, result);
         }
     }
@@ -146,7 +146,7 @@ namespace FitnessSystemTests
     public class StandardMedlemskabTests
     {
         [TestMethod]
-        public void TC12()
+        public void TC11()
         {
             StandardMedlemskab sut = new StandardMedlemskab(
                 start: new DateTime(2026, 1, 15),
