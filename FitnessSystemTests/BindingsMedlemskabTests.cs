@@ -84,4 +84,77 @@ namespace FitnessSystemTests
             Assert.AreEqual(1050.0, result);
         }
     }
+
+    [TestClass]
+    public class KlippekortMedlemskabTests
+    {
+        [TestMethod]
+        public void TC8()
+        {
+            KlippekortMedlemskab sut = new KlippekortMedlemskab(
+                start: new DateTime(2026, 1, 1),
+                slut: new DateTime(2026, 6, 1));
+
+            double result = sut.BeregnSamletPris();
+
+            Assert.AreEqual(1200.0, result);
+        }
+
+        [TestMethod]
+        public void TC9()
+        {
+            KlippekortMedlemskab sut = new KlippekortMedlemskab(
+                start: new DateTime(2026, 1, 1),
+                slut: new DateTime(2026, 1, 20));
+            sut.PTKlipDatoer.Add(new DateTime(2026, 1, 15));
+
+            double result = sut.BeregnSamletPris();
+
+            Assert.AreEqual(500.0, result);
+        }
+
+        [TestMethod]
+        public void TC10()
+        {
+            KlippekortMedlemskab sut = new KlippekortMedlemskab(
+                start: new DateTime(2026, 1, 1),
+                slut: new DateTime(2026, 1, 20));
+            sut.PTKlipDatoer.Add(new DateTime(2026, 1, 25));
+
+            double result = sut.BeregnSamletPris();
+
+            // Fejler: ugyldige klip skal ignoreres, men koden trækker 50 kr. fra.
+            Assert.AreEqual(200.0, result);
+        }
+
+        [TestMethod]
+        public void TC11()
+        {
+            KlippekortMedlemskab sut = new KlippekortMedlemskab(
+                start: new DateTime(2026, 1, 1),
+                slut: new DateTime(2026, 1, 20));
+            sut.PTKlipDatoer.Add(new DateTime(2026, 1, 20, 18, 0, 0));
+
+            double result = sut.BeregnSamletPris();
+
+            // Fejler: klokkeslættet skal ignoreres, men koden sammenligner hele datoen.
+            Assert.AreEqual(500.0, result);
+        }
+    }
+
+    [TestClass]
+    public class StandardMedlemskabTests
+    {
+        [TestMethod]
+        public void TC12()
+        {
+            StandardMedlemskab sut = new StandardMedlemskab(
+                start: new DateTime(2026, 1, 15),
+                slut: new DateTime(2026, 1, 15));
+
+            double result = sut.BeregnSamletPris();
+
+            Assert.AreEqual(200.0, result);
+        }
+    }
 }
