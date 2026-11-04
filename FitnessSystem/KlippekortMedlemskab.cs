@@ -17,13 +17,20 @@ namespace FitnessSystemTestØvelse
 
             foreach (var klipDato in PTKlipDatoer)
             {
-                if (klipDato >= StartDato && klipDato <= SlutDato)
+                // Gammel kode: fejler TC11, fordi klokkeslættet også sammenlignes.
+                // if (klipDato >= StartDato && klipDato <= SlutDato)
+                // {
+                //     pris += 300.0;
+                // }
+                // else
+                // {
+                //     // Fejler TC10: ugyldige klip skal ignoreres.
+                //     pris -= 50.0;
+                // }
+
+                if (klipDato.Date >= StartDato.Date && klipDato.Date <= SlutDato.Date)
                 {
                     pris += 300.0;
-                }
-                else
-                {
-                    pris -= 50.0;
                 }
             }
 
