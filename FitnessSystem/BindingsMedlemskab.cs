@@ -18,7 +18,7 @@ namespace FitnessSystemTestØvelse
             int aktueltAntalMåneder = BeregnAntalMåneder(StartDato, SlutDato);
             double pris = aktueltAntalMåneder * BasisMånedsPris;
 
-            if (aktueltAntalMåneder <= BindingsMåneder)
+            if (aktueltAntalMåneder < BindingsMåneder)
             {
                 pris += 500.0;
             }
